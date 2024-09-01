@@ -1,0 +1,196 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>WBA Ror AB1</title>
+    <script type="text/javascript" src="js/swfobject.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+  </head>
+  <body>
+    <div id="backcontainer">
+      <div id="backswf"></div>
+    </div>
+    <div id="forecontainer">
+      <table>
+        <tr>
+          <td class="tclass">
+            <a href="http://www.genomics.cn">
+            <img border="" src="image/logo.png" width="129px" height="58px">
+            </a>
+          </td>
+          <td class="tdclass">
+            <div id="bcolor" style="color: rgb(184, 89, 164);">
+              <!--<font class="subhd">Export sequences in plain FASTA
+              formats,Cross_match vector sequences to produce vector-masked reads and
+              Phrap for assembling shotgun DNA sequence data.</font>
+              <br>-->
+              <font class="sect">这是一个简单实用的网站，用于3730测序峰图的转序列，去载体和拼接。</font>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="fakelink"
+      id="show_e"
+      onclick="this.style.display='none';
+      document.getElementById('hide_e').style.display='block';
+      document.getElementById('elevation').style.display='inline';
+    ">&raquo; 显示使用说明</div>
+    <div class="fakelink"
+      id="hide_e"
+      onclick="this.style.display='none';
+      document.getElementById('show_e').style.display='block';
+      document.getElementById('elevation').style.display='none';
+    ">&raquo; 隐藏使用说明</div>
+    <div id="elevation">
+      <p><b>①数据要求:</b>需要处理的数据，必须为ab1峰图或峰图压缩包，压缩包类型只支持RAR和Zip类型，压缩包内文件夹命名和层次不限制。压缩包和峰图命名由字母、数字或下划线组成，否则结果的压缩包名中其他字符均用下划线替换，上传压缩包内峰图名如有其他字符均用中线替换，命名替换不会影响结果。</p>
+      <p><b>②拼接要求:</b>单样品拼接只适合单个样品，即只要成功上传一个样品的峰图压缩包，就拼成一条Contig，否则拼接失败。<br />
+批量拼接对峰图命名要求严格，峰图命名规则 'SampleID__[……]_ClenitID_WellNumber_SerialID.ab1' ，即“[样品名]__[……]_[客户ID]_[孔号]_[流水号].ab1”。“[样品名]”中不应有双下划线，“[……]”命名不限制，“[客户ID]_[孔号]_[流水号].ab1”格式次序要对应。如果“[样品名]”、“[客户ID]”和“[流水号]”一致，则认为是同一组拼接。<br />
+批量拼接峰图命名例如：Sanger3730__[华大]_BGI3315_A01_12506010.ab1。</p>
+    </div>
+    <form method="post" action="/cgi-bin/webuse.cgi" enctype="multipart/form-data" onsubmit="return chkForm(this,'请选择要上传的数据')">
+      <div class="formfield">
+        <table>
+          <tbody>
+            <tr>
+              <td class="formlable td_first">需要处理的峰图：</td>
+              <td colspan="4"><input class="bsb" id="uploadMyData" type="file" name="data" value="" /></td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+              <td class="formlable td_first"> 如需去载体，请选择: </td>
+              <td colspan="4"><input type="radio" name="input_vector" value="" checked="checked" />不去载体<br /></td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="Bluescript" />Bluescript</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pBluescript-" />pBluescript-</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pBluescript+" />pBluescript+</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pBeloBAC11" />pBeloBAC11</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pCC1BAC" />pCC1BAC</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pcc1fos" />pcc1fos</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pcc2fos" />pcc2fos</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pDNR-LIB" />pDNR-LIB</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pEASY-T1" />pEASY-T1</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pGADT7" />pGADT7</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pGADT7-RecAB" />pGADT7-RecAB</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pGEM-T" />pGEM-T</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pGEM-T_easy" />pGEM-T_easy</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="PindigoBAC-5" />PindigoBAC-5</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pIndigoBAC536-S" />pIndigoBAC536-S</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pMD18-T" />pMD18-T</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pMD19-T" />pMD19-T</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pMD19-T_Simple" />pMD19-T_Simple</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pSMART-BAC" />pSMART-BAC</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="puc118" />puc118</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="Invitrogen_PCR4_TOPO" />Invitrogen_PCR4_TOPO</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="Lambda-ZAP-II" />Lambda-ZAP-II</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pACT2" />pACT2</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pAD-GAL4-2.1" />pAD-GAL4-2.1</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pAGIBAC1" />pAGIBAC1</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pAL17-3" />pAL17-3</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pAP3neo" />pAP3neo</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pBAC-SACB1" />pBAC-SACB1</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pBK-CMV" />pBK-CMV</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pBluescriptIIKS+" />pBluescriptIIKS+</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pCAMBIA" />pCAMBIA</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pCAMBIA-1300" />pCAMBIA-1300</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pcDNA3.1+" />pcDNA3.1+</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pCLD04541" />pCLD04541</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pcr4topo" />pcr4topo</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pCUGIBAC1" />pCUGIBAC1</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pcv" />pcv</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pDONR222" />pDONR222</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pECBAC1" />pECBAC1</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pEXP" />pEXP</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pGEM" />pGEM</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pGEM-4Z" />pGEM-4Z</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pGEM-T_new" />pGEM-T_new</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pINDIGOBAC-HINDIII" />pINDIGOBAC-HINDIII</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pLIB" />pLIB</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pretrosuper" />pretrosuper</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="promega_pGEM_T-easy" />promega_pGEM_T-easy</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pSMART2IF" />pSMART2IF</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pTA2" />pTA2</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pTARBAC1.3" />pTARBAC1.3</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pTARBAC2.1" />pTARBAC2.1</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pTripIEx2" />pTripIEx2</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pTrueBlue" />pTrueBlue</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pTWV228" />pTWV228</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pTZ18R" />pTZ18R</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="puc119" />puc119</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="puc18" />puc18</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="puc19" />puc19</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pUCP18" />pUCP18</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pWEB" />pWEB</td>
+            </tr>
+            <tr>
+              <td class="td_first"></td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pHzAuBAC1" />pHzAuBAC1</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="pYLTAC7" />pYLTAC7</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="Pzero1" />Pzero1</td>
+              <td class="td_other"><input type="radio" name="input_vector" value="T-easy" />T-easy</td>
+            </tr>
+            <tr>
+              <td class="formlable td_first">是否需要拼接:</td>
+              <td colspan="1"><input type="radio" name="phrap" value="" />无需拼接<br /></td>
+              <td colspan="1"><input type="radio" name="phrap" value="单样品拼接" />单样品拼接<br /></td>
+              <td colspan="2"><input type="radio" name="phrap" value="批量拼接" checked="checked" />批量拼接<br /></td>
+            </tr>
+            <tr>
+              <td class="formlable td_first"></td>
+              <td colspan="4"><input class="bsb" type="submit" value="提交" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="bsb" type="reset" value="重置" /></td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="funny"></div>
+        <div class="footer"><p>如有任何疑问请联系电话：01080481433 &nbsp;&nbsp;&nbsp;邮箱地址:<a href="mailto:wangbinan@genomics.cn">wangbinan@genomics.cn</a></p></div>
+      </div>
+    </form>
+  </body>
+</html>
